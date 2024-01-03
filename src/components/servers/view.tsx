@@ -15,7 +15,7 @@ export function ViewServer({server_id}) {
                 throw("cant find display");
             }
 
-            let tunnel = new Guacamole.WebSocketTunnel("ws://localhost:7070/?token=eyJpdiI6ImR6STJNRlFnUDhnQ0RSTlRWSHFBVGc9PSIsInZhbHVlIjoiUlZCbkNyYjhoc2k2V1V0SWwrUDF2R2I4aXFUcWIxYjNJcTFaOWY1UUlhNzhjNmpYUGFrcWpoK3RYQkJJUlJjOXRmVUZ4RzJRTURnb3MxbnVNM0tqL1ZUMEZWQURpSDdDZDZUeGF5U1g3UW9zb0FIaHpqditwRXpDUVVqS0ErWXB4aG1TZDc4NXl2bGJrWUZQQmtqbFpQaHQxMkozdkRjUWt4bVphZlZzd25CY2g3YlRRWXd3dlk1UDN0c3NEbHM3bVo4R2ZTT3NkTkV3V1JZTTdWVWdHc1o5NHlUUHJpYnowSEI2eFpWb0dBdmFSN1lZSHFIWHdLbnhRWnlteHZROEMrQmcvZHV6WFFqb1B5Smc0WXFyNUQvTXVIcW1pY2lGejU4OFhRUEZmNnNZT1JOT044cUJmMHdZWWN1eVF3RDUifQ%3D%3D")
+            let tunnel = new Guacamole.WebSocketTunnel("ws://localhost:4567/websocket-tunnel?scheme=vnc")
             let guac = new Guacamole.Client(tunnel);
 
 
