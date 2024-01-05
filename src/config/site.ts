@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Osmono",
-  url: "https://ui.shadcn.com",
+  url: "https://osmono.net",
   ogImage: "https://ui.shadcn.com/og.jpg",
   description:
     "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.",
