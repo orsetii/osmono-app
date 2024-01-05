@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { PillNav } from "@/components/nav/pill-nav";
-import { MainNav } from "@/components/nav/main-nav";
-import { Toaster } from "@/components/ui/sonner";
 import { SiteHeader } from "@/components/header";
 import { SiteFooter } from "@/components/footer";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,14 +14,8 @@ export const metadata: Metadata = {
   description: "",
 };
 
-function isLoggedIn() {
-  return false;
-}
 
-
-
-
-export default function App({ children }) {
+export default function App({ children }: any) {
   return (
 
     <UserProvider>
@@ -43,13 +35,11 @@ export default function App({ children }) {
                   <main className="flex-1">
                     {children}
                   </main>
+                  <Toaster />
                   <SiteFooter />
                 </div>
               </div>
         </ThemeProvider>
-
-
-
     </body>
     </html>
     </UserProvider>
