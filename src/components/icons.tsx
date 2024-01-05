@@ -5,8 +5,8 @@ export const Icons = {
     <>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="36" width="36" {...props} >
   <g fill="none">
-    <circle cx="259.975" cy="261.235" r="228.47" stroke="teal" stroke-width="24"/>
-    <circle cx="264.384" cy="250.529" r="113.589" stroke="#008124" stroke-width="11.932" image-rendering="pixelated" />
+    <circle cx="259.975" cy="261.235" r="228.47" stroke="teal" strokeWidth="24"/>
+    <circle cx="264.384" cy="250.529" r="113.589" stroke="#008124" strokeWidth="11.932" imageRendering="pixelated" />
   </g>
 </svg>
 
