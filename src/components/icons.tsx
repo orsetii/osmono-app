@@ -1,32 +1,16 @@
-type IconProps = React.HTMLAttributes<SVGElement>
+type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
   logo: (props: IconProps) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" {...props}>
-      <rect width="256" height="256" fill="none" />
-      <line
-        x1="208"
-        y1="128"
-        x2="128"
-        y2="208"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="16"
-      />
-      <line
-        x1="192"
-        y1="40"
-        x2="40"
-        y2="192"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="16"
-      />
-    </svg>
+    <>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="36" width="36" {...props} >
+  <g fill="none">
+    <circle cx="259.975" cy="261.235" r="228.47" stroke="teal" stroke-width="24"/>
+    <circle cx="264.384" cy="250.529" r="113.589" stroke="#008124" stroke-width="11.932" image-rendering="pixelated" />
+  </g>
+</svg>
+
+    </>
   ),
   twitter: (props: IconProps) => (
     <svg
@@ -145,4 +129,4 @@ export const Icons = {
       <path d="M21 12a9 9 0 1 1-6.219-8.56" />
     </svg>
   ),
-}
+};
