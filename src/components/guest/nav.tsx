@@ -1,15 +1,19 @@
-import Link from "next/link";
-import { Icons } from "../icons";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
+"use client"
+
+import * as React from "react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-export function MainNav() {
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { Icons } from "@/components/icons"
+import { Badge } from "@/components/ui/badge"
 
+export function GuestNav() {
   const pathname = usePathname()
-return (
 
-<div className="mr-4 hidden md:flex mx-6">
+  return (
+    <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
         <Icons.logo className="h-8 w-8" />
         <span className="hidden font-bold sm:inline-block">
@@ -24,7 +28,7 @@ return (
             pathname === "/docs" ? "text-foreground" : "text-foreground/60"
           )}
         >
-          Docs
+        Docs
         </Link>
         <Link
           href="/pricing"
@@ -50,5 +54,5 @@ return (
         </Link>
       </nav>
     </div>
-    )
+  )
 }

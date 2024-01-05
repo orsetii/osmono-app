@@ -17,7 +17,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { CalendarDateRangePicker } from "@/components/ui/date-range-picker"
-import { MainNav } from "@/components/nav/dash-nav"
+import { MainNav } from "@/components/nav/main-nav"
 import { Overview } from "@/components/dashboard/overview"
 import { RecentSales } from "@/components/dashboard/recent-sales"
 import { Search } from "@/components/dashboard/search"
