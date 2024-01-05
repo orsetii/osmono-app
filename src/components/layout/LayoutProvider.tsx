@@ -2,14 +2,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Header } from "@/components/header";
 
 import { UserProvider, useUser } from '@auth0/nextjs-auth0/client';
 import { Toaster } from "sonner";
 import ClipLoader from "react-spinners/ClipLoader";
-import { GuestFooter } from "./guest/footer";
-import { GuestHeader } from "./guest/header";
+import { GuestFooter } from "../guest/footer";
+import { GuestHeader } from "../guest/header";
+import { Header } from "../nav/header";
+import { ThemeProvider } from "../theme/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

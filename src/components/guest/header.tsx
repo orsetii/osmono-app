@@ -3,7 +3,7 @@
 import { CommandMenu } from "@/components/nav/command-menu"
 import { GuestNav } from "@/components/guest/nav"
 import { MobileNav } from "../nav/mobile-nav"
-import { ModeToggle } from "@/components/mode-toggle"
+import { ModeToggle } from "@/components/misc/mode-toggle"
 import { UserNav } from "../nav/user-nav"
 export function GuestHeader() {
   return (

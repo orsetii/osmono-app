@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { Icons } from "@/components/icons"
+import { Icons } from "@/components/misc/icons"
 import { Badge } from "@/components/ui/badge"
 
 export function GuestNav() {
