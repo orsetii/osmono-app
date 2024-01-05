@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
@@ -8,6 +9,19 @@ import { MainNav } from "@/components/nav/main-nav"
 import { MobileNav } from "./nav/mobile-nav"
 import { ModeToggle } from "@/components/mode-toggle"
 import { buttonVariants } from "@/components/ui/button"
+import { UserNav } from "./nav/user-nav"
+import LoginButton from "./auth/login-button"
+import { useUser } from "@auth0/nextjs-auth0/client"
+
+
+export function AuthButton() {
+  const {user, error, isLoading} = useUser();
+  if(user) {
+    return <UserNav user={user} />
+  } else {
+    return <LoginButton />
+  }
+}
 
 export function SiteHeader() {
   return (
@@ -20,23 +34,8 @@ export function SiteHeader() {
             <CommandMenu />
           </div>
           <nav className="flex items-center">
-            <Link
-              href="Login"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={cn(
-                  buttonVariants({
-                    variant: "default",
-                  }),
-                  "w-14 px-1 text-center mr-2"
-                )}
-              >
-                <span className="h-4 w-16">Log In</span>
-              </div>
-            </Link>
             <ModeToggle />
+            <AuthButton />
           </nav>
         </div>
       </div>
