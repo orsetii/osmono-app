@@ -32,11 +32,11 @@ export function MainNav() {
 
       </Link>
       <nav className="flex items-center gap-6 text-sm">
-        <NavLink name="Servers" link="/events" pathname={pathname} />
+        <NavLink name="Servers" link="/servers" pathname={pathname} />
         <NavLink name="Events" link="/events"  pathname={pathname} />
-        <NavLink name="Tickets" link="/events"  pathname={pathname} />
-        <NavLink name="Logs" link="/events"  pathname={pathname} />
-        <NavLink name="Customers" link="/events" pathname={pathname}  />
+        <NavLink name="Tickets" link="/tickets"  pathname={pathname} />
+        <NavLink name="Logs" link="/logs"  pathname={pathname} />
+        <NavLink name="Customers" link="/customers" pathname={pathname}  />
 </nav>
     </div>
   );

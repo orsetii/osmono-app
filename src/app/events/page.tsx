@@ -9,9 +9,10 @@ import {
  
 export default function ResizableDemo() {
   return (
+
     <ResizablePanelGroup
       direction="horizontal"
-      className="min-h-screen min-w-screen rounded-lg border"
+      className="rounded-lg border min-h-[calc(95vh-3.5rem)]"
     >
       <ResizablePanel defaultSize={25}>
         <div className="flex h-full items-center justify-center p-6">

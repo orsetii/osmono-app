@@ -56,9 +56,9 @@ export function LayoutProvider({ children }: any) {
           disableTransitionOnChange
         >
               <div vaul-drawer-wrapper="">
-                <div className="relative flex min-h-screen flex-col bg-background">
+                <div className="relative flex min-h-screen max-h-screen flex-col bg-background">
                   <Header />
-                  <main className="flex-1">
+                  <main className="flex-1 p-6 h-[calc(100vh-3.5rem)]">
                     {children}
                   </main>
                   <Toaster />

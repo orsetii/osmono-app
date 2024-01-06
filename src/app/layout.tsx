@@ -15,8 +15,9 @@ export const metadata: Metadata = {
 export default function App({ children }: any) {
   return (
     <UserProvider>
+
       <html>
-        <body className="min-h-screen bg-background font-sans antialiased">
+        <body className="min-h-screen overflow-hidden bg-background font-sans antialiased">
           <LayoutProvider children={children} />
         </body>
       </html>

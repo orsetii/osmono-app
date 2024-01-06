@@ -75,4 +75,9 @@
   body {
     @apply bg-background text-foreground;
   }
+
+.guac-canvas {
+  z-index: 1 !important;
 }
+}
+
