@@ -23,9 +23,7 @@ import { RecentSales } from "@/components/dashboard/recent-sales"
 import { Search } from "@/components/dashboard/search"
 import TeamSwitcher from "@/components/dashboard/team-switcher"
 import { toast } from "sonner"
-export function toastGo() {
-  toast("test")
-}
+
 
 export default function DashboardPage() {
   return (
@@ -36,7 +34,7 @@ export default function DashboardPage() {
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <CalendarDateRangePicker />
-              <Button onClick={toastGo} >Download</Button>
+              <Button  >Download</Button>
             </div>
           </div>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

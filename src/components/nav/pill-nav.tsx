@@ -6,7 +6,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons"
 
 import { cn } from "@/lib/utils"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { ModeToggle } from "@/components/mode-toggle"
+import { ModeToggle } from "@/components/misc/mode-toggle"
 
 const examples = [
   {

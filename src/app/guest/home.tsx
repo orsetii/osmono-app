@@ -5,7 +5,7 @@ import Link from "next/link"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Announcement } from "@/components/ui/announcement"
-import { Icons } from "@/components/icons"
+import { Icons } from "@/components/misc/icons"
 import {
   PageActions,
   PageHeader,

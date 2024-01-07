@@ -10,12 +10,13 @@ import { GuestFooter } from "../guest/footer";
 import { GuestHeader } from "../guest/header";
 import { Header } from "../nav/header";
 import { ThemeProvider } from "../theme/theme-provider";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 
 
-export function LayoutProvider({ children }: any) {
+export function LayoutProvider({children}: {children: any}) {
   const { user, error, isLoading } = useUser();
 
   if(isLoading && !user) return ( <><ClipLoader loading={isLoading} size={64} color="white" /></>)
@@ -59,7 +60,7 @@ export function LayoutProvider({ children }: any) {
                 <div className="relative flex min-h-screen max-h-screen flex-col bg-background">
                   <Header />
                   <main className="flex-1 p-6 h-[calc(100vh-3.5rem)]">
-                    {children}
+{children}
                   </main>
                   <Toaster />
                 </div>
