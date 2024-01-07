@@ -1,3 +1,6 @@
+import { uuid } from "uuidv4";
+
+
 export type Server = {
   id: string;
   status: number;
@@ -13,13 +16,43 @@ export type SystemInfo = {
   version: string
 }
 
+export function statusToText(status: number): string {
+  switch (status) {
+    case 0:
+      return "offline";
+    case 1:
+      return "online";
+    case 2:
+      return "issues";
+    default:
+      return "unknown"
+
+  }
+}
+
+
+export function statusToEmoji(status: number): string {
+  switch (status) {
+    case 0:
+          return "🔴"
+    case 1:
+          return "🟢"
+    case 2:
+          return "🟡"
+    default:
+          return "🟣"
+  }
+}
+
+
+
 export function DefaultServer(): Server {
   return {
-    id: "0000-0000-0000-0000",
+    id: uuid(),
     status: 1,
     org_name: "EXAMPLE_ORG",
     server_name: "EXAMPLE_SERVER",
-    org_id: "0000-0000-0000-0000",
+    org_id: uuid(),
     last_activity: "05:17",
     system_info: {
       os_type: "windows",

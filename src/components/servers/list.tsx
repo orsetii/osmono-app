@@ -11,6 +11,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
+  Table as ReactTable,
   VisibilityState,
   flexRender,
   getCoreRowModel,
@@ -18,6 +19,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  Row as ReactTableRow,
 } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
@@ -42,33 +44,25 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ServerComponentProps } from "@/app/servers/page";
-import { Server } from "@/types/server";
+import { DefaultServer, Server, statusToEmoji, statusToText } from "@/types/server";
+import Link from "next/link";
 
 const data: Server[] = [
-  {
-    id: "0000-0000-0000-0000",
-    status: 1,
-    org_name: "EXAMPLE_ORG",
-    server_name: "EXAMPLE_SERVER",
-    org_id: "0000-0000-0000-0000",
-    last_activity: "05:17",
-  },
+  DefaultServer(),
+  DefaultServer(),
+  DefaultServer(),
+  DefaultServer(),
 ];
 
-function statusToEmoji(status: number) {
-  switch (status) {
-    case 0:
-      return <span title="Offline">🔴</span>;
-    case 1:
-      return (
-        <span className="pl-2" title="Online">
-          🟢
-        </span>
-      );
-    case 2:
-      return <span title="Issues">🟡</span>;
-  }
-  return <span title="Unknown">🟣</span>;
+function DisableAllSelected(table: ReactTable<Server>) {
+  table.getRowModel().rows.forEach((row: ReactTableRow<Server>) => {
+    if (row.getIsSelected()) row.toggleSelected();
+  });
+}
+/// Sets the current server to be displayed in the details section.
+/// Also highlights the row currently displayed.
+function setCurrentServer(newServer: Server, propServer: Server) {
+  propServer = newServer;
 }
 
 export const columns: ColumnDef<Server>[] = [
@@ -76,9 +70,10 @@ export const columns: ColumnDef<Server>[] = [
     accessorKey: "status",
     header: "",
     cell: (
-      { row } // TODO: create a uint -> emoji/sign conversion method for displaying here
+      { row }
     ) => (
-      <div className="capitalize">{statusToEmoji(row.getValue("status"))}</div>
+      
+        <span className="pl-2" title={statusToText(row.getValue("status"))}>{statusToEmoji(row.getValue("status"))}</span>
     ),
   },
   {
@@ -137,15 +132,16 @@ export const columns: ColumnDef<Server>[] = [
               <DotsHorizontalIcon className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="serverListActions">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-            Connect
-
-<DropdownMenuShortcut>
-                <OpenInNewWindowIcon width="1rem" height="1rem"/>
-</DropdownMenuShortcut>
+              <Link href={`/logs/${row.original.id}`}>Connect</Link>
+              <DropdownMenuShortcut>
+                <Link href={`/logs/${row.original.id}`}>
+                  <OpenInNewWindowIcon width="1rem" height="1rem" />
+                </Link>
+              </DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
@@ -153,10 +149,18 @@ export const columns: ColumnDef<Server>[] = [
             >
               Copy server ID
             </DropdownMenuItem>
-            <DropdownMenuItem>View Logs</DropdownMenuItem>
-            <DropdownMenuItem>View Events</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/logs/${row.original.id}`}>View Logs</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/events/${row.original.id}`}>View Events</Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Organization</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/customers/${row.original.org_id}`} target="_blank">
+                View Customer
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -164,9 +168,7 @@ export const columns: ColumnDef<Server>[] = [
   },
 ];
 
-
-
-export function ServerList({server}: ServerComponentProps) {
+export function ServerList({ server }: ServerComponentProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -260,6 +262,12 @@ export function ServerList({server}: ServerComponentProps) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onDoubleClick={() => {
+                    DisableAllSelected(table);
+                    row.toggleSelected();
+                    setCurrentServer(row.original, server);
+                  }}
+                  className="select-none"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

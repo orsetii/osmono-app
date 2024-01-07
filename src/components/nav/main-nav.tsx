@@ -3,6 +3,7 @@ import { Icons } from "../misc/icons";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { useUser } from "@auth0/nextjs-auth0/client"
 
 function NavLink({ name, link, pathname }: any) {
   return (
@@ -22,9 +23,10 @@ function NavLink({ name, link, pathname }: any) {
 
 export function MainNav() {
   const pathname = usePathname();
+  
   return (
     <div className="mr-4 hidden md:flex mx-6">
-      <Link href="/" className="mr-6 flex items-center space-x-2">
+      <Link href="/dashboard" className="mr-6 flex items-center space-x-2">
         <Icons.logo className="h-8 w-8" />
         <span className="hidden font-bold sm:inline-block">
           {siteConfig.name}
