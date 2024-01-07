@@ -46,6 +46,7 @@ import {
 import { ServerComponentProps } from "@/app/servers/page";
 import { DefaultServer, Server, statusToEmoji, statusToText } from "@/types/server";
 import Link from "next/link";
+import { uuid } from "uuidv4";
 
 const data: Server[] = [
   DefaultServer(),
@@ -54,16 +55,7 @@ const data: Server[] = [
   DefaultServer(),
 ];
 
-function DisableAllSelected(table: ReactTable<Server>) {
-  table.getRowModel().rows.forEach((row: ReactTableRow<Server>) => {
-    if (row.getIsSelected()) row.toggleSelected();
-  });
-}
-/// Sets the current server to be displayed in the details section.
-/// Also highlights the row currently displayed.
-function setCurrentServer(newServer: Server, propServer: Server) {
-  propServer = newServer;
-}
+
 
 export const columns: ColumnDef<Server>[] = [
   {
@@ -168,7 +160,31 @@ export const columns: ColumnDef<Server>[] = [
   },
 ];
 
-export function ServerList({ server }: ServerComponentProps) {
+export function ServerList({server, setServer}: ServerComponentProps) {
+
+/// Sets the current server to be displayed in the details section.
+/// Also highlights the row currently displayed.
+function setCurrentServer(newServer: Server, table: ReactTable<Server>) {
+  setServer(newServer);
+  table.getRowModel().rows.forEach((row: ReactTableRow<Server>) => {
+    if (row.getIsSelected()) row.toggleSelected();
+    if(row.original.id === server.id) row.toggleSelected();
+  });
+}
+  data.push({
+    id: uuid(),
+    status: 1,
+    org_name: "TEST_ORG",
+    server_name: "TEST",
+    org_id: uuid(),
+    last_activity: "05:17",
+    system_info: {
+      os_type: "ubuntu",
+      version: "21.3.9"
+    }
+  })
+
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -236,7 +252,7 @@ export function ServerList({ server }: ServerComponentProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border h-4/6">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -263,9 +279,7 @@ export function ServerList({ server }: ServerComponentProps) {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onDoubleClick={() => {
-                    DisableAllSelected(table);
-                    row.toggleSelected();
-                    setCurrentServer(row.original, server);
+                    setCurrentServer(row.original, table);
                   }}
                   className="select-none"
                 >

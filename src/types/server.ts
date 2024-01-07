@@ -12,7 +12,8 @@ export type Server = {
 };
 
 export type SystemInfo = {
-  os_type: "windows" | "linux" | "macos";
+  os_type: "windows" | "macos" | "ubuntu" 
+            | "centos" | "redhat" | "debian";
   version: string
 }
 

@@ -14,9 +14,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { DefaultServer, Server } from "@/types/server";
 import { ServerDetails } from "@/components/servers/details";
+import { ServerInsertedHTMLContext } from "next/navigation";
 
 
 
@@ -29,14 +30,15 @@ export default function Servers() {
       direction="horizontal"
       className="rounded-lg border min-h-[calc(95vh-3.5rem)] max-h-[calc(95vh-3.5rem)]"
     >
+
       <ResizablePanel defaultSize={55}>
         <div className="flex h-full max-h-full items-center justify-center p-3">
-          <ServerList server={currentServerInfo} />
+          <ServerList server={currentServerInfo} setServer={setServerInfo} />
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={45}>
-        <ServerDetails server={currentServerInfo} />
+        <ServerDetails server={currentServerInfo} setServer={setServerInfo} />
       </ResizablePanel>
     </ResizablePanelGroup>
   );
@@ -44,6 +46,7 @@ export default function Servers() {
 
 export type ServerComponentProps = {
     server: Server
+    setServer: Dispatch<SetStateAction<Server>>
 }
 
 
