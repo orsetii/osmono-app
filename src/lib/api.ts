@@ -1,8 +1,0 @@
-function get() {
-
-}
-
-function post() {
-
-}
-
