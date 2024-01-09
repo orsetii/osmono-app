@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input"
 
-export function Search({className}: any) {
+export function Search() {
   return (
     <div>
       <Input

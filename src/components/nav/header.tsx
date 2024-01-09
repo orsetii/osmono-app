@@ -1,5 +1,3 @@
-"use client"
-
 import { UserNav } from "./user-nav"
 import { MainNav } from "./main-nav"
 import { Search } from "../dashboard/search"
