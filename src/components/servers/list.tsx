@@ -41,29 +41,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ServerComponentProps } from "@/types/server";
-import { DefaultServer, Server, statusToEmoji, statusToText } from "@/types/server";
-import { uuid } from "uuidv4";
+import {
+  Server,
+  statusToEmoji,
+  statusToText,
+} from "@/types/server";
 
-import { Link } from "react-router-dom"
-
-const data: Server[] = [
-  DefaultServer(),
-  DefaultServer(),
-  DefaultServer(),
-  DefaultServer(),
-];
-
-
+import { Link } from "react-router-dom";
+import { idfetch} from "@/lib/api";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const columns: ColumnDef<Server>[] = [
   {
     accessorKey: "status",
     header: "",
-    cell: (
-      { row }
-    ) => (
-      
-        <span className="pl-2" title={statusToText(row.getValue("status"))}>{statusToEmoji(row.getValue("status"))}</span>
+    cell: ({ row }) => (
+      <span className="pl-2" title={statusToText(row.getValue("status"))}>
+        {statusToEmoji(row.getValue("status"))}
+      </span>
     ),
   },
   {
@@ -85,25 +80,25 @@ export const columns: ColumnDef<Server>[] = [
     ),
   },
   {
-    id: "server_name",
-    accessorKey: "server_name",
+    id: "Name",
+    accessorKey: "Name",
     header: () => <div className="text-center">Server Name</div>,
     cell: ({ row }) => {
       return (
         <div className="text-right font-medium">
-          {row.getValue("server_name")}
+          {row.getValue("Name")}
         </div>
       );
     },
   },
   {
-    id: "last_activity",
-    accessorKey: "last_activity",
+    id: "LastConnected",
+    accessorKey: "LastConnected",
     header: () => <div className="text-right">Last Activity</div>,
     cell: ({ row }) => {
       return (
         <div className="text-right font-medium">
-          {row.getValue("last_activity")}
+          {row.getValue("LastConnected")}
         </div>
       );
     },
@@ -158,30 +153,29 @@ export const columns: ColumnDef<Server>[] = [
   },
 ];
 
-export function ServerList({server, setServer}: ServerComponentProps) {
+export function ServerList({ server, setServer }: ServerComponentProps) {
+  const { user, getAccessTokenSilently, isAuthenticated } = useAuth0();
+  /// Sets the current server to be displayed in the details section.
+  /// Also highlights the row currently displayed.
+  function setCurrentServer(newServer: Server, table: ReactTable<Server>) {
+    setServer(newServer);
+    table.getRowModel().rows.forEach((row: ReactTableRow<Server>) => {
+      if (row.getIsSelected()) row.toggleSelected();
+      if (row.original.id === newServer.id) row.toggleSelected();
+    });
+  }
 
-/// Sets the current server to be displayed in the details section.
-/// Also highlights the row currently displayed.
-function setCurrentServer(newServer: Server, table: ReactTable<Server>) {
-  setServer(newServer);
-  table.getRowModel().rows.forEach((row: ReactTableRow<Server>) => {
-    if (row.getIsSelected()) row.toggleSelected();
-    if(row.original.id === server.id) row.toggleSelected();
-  });
-}
-  data.push({
-    id: uuid(),
-    status: 1,
-    org_name: "TEST_ORG",
-    server_name: "TEST",
-    org_id: uuid(),
-    last_activity: "05:17",
-    system_info: {
-      os_type: "ubuntu",
-      version: "21.3.9"
-    }
-  })
+  const [data, setData] = React.useState([]);
 
+  React.useEffect(() => {
+    (async () => {
+      console.log("Fetching.... isAuth: " + isAuthenticated + " sub: " + user?.sub);
+      idfetch("/servers", user?.sub ?? "ERROR").then((response) =>
+        response.json().then((data) => setData(data))
+      );
+      console.log(data)
+    })();
+  }, [getAccessTokenSilently]);
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -216,10 +210,10 @@ function setCurrentServer(newServer: Server, table: ReactTable<Server>) {
         <Input
           placeholder="Filter"
           value={
-            (table.getColumn("server_name")?.getFilterValue() as string) ?? ""
+            (table.getColumn("name")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("server_name")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="w-1/2"
         />

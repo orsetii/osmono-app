@@ -1,16 +1,15 @@
 import { Dispatch, SetStateAction } from "react";
-import { uuid } from "uuidv4";
 
 
 export type ServerComponentProps = {
-  server: Server,
-  setServer: Dispatch<SetStateAction<Server>>
+  server?: Server,
+  setServer: Dispatch<SetStateAction<Server | undefined>>
 }
 
 export type Server = {
   id: string;
   status: number;
-  server_name: string;
+  name: string;
   org_name: string;
   org_id: string;
   last_activity: string;
@@ -55,11 +54,11 @@ export function statusToEmoji(status: number): string {
 
 export function DefaultServer(): Server {
   return {
-    id: uuid(),
+    id: crypto.randomUUID(),
     status: 1,
     org_name: "EXAMPLE_ORG",
-    server_name: "EXAMPLE_SERVER",
-    org_id: uuid(),
+    name: "EXAMPLE_SERVER",
+    org_id: crypto.randomUUID(),
     last_activity: "05:17",
     system_info: {
       os_type: "windows",

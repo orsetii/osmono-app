@@ -8,6 +8,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { cn } from "@/lib/utils";
 
 export function ServerDetails({ server }: ServerComponentProps) {
+  if(server === undefined) return (<></>)
   return (
     <>
       <div className="flex h-full items-start justify-center p-2 mt-8">
@@ -20,7 +21,7 @@ export function ServerDetails({ server }: ServerComponentProps) {
               </Avatar>
               <div className="flex flex-col ml-16 text-right w-full">
                 <h2 className="block w-full text-xl font-bold">
-                  {server.server_name}
+                  {server.name}
                 </h2>
                 <Button variant="link" className="text-right pl-4 pr-0">
                   <h4 className="block w-full text-md font-bold">

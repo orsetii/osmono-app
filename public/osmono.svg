@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="swatch27">
+      <stop
+         style="stop-color:#00ffff;stop-opacity:1;"
+         offset="0"
+         id="stop28" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient21">
+      <stop
+         style="stop-color:#00ffff;stop-opacity:1;"
+         offset="0"
+         id="stop22" />
+      <stop
+         style="stop-color:#00ffff;stop-opacity:0;"
+         offset="1"
+         id="stop23" />
+    </linearGradient>
+    <linearGradient
+       id="swatch6">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6" />
+    </linearGradient>
+  </defs>
+  <g
+     id="layer1">
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#008080;stroke-width:24;stroke-dasharray:none;stroke-opacity:1"
+       id="path1"
+       cx="259.9754"
+       cy="261.23492"
+       r="228.4698" />
+    <circle
+       style="mix-blend-mode:darken;fill:none;fill-opacity:1;stroke:#008124;stroke-width:11.932;stroke-dasharray:none;stroke-opacity:1;image-rendering:pixelated"
+       id="circle6"
+       cx="264.38376"
+       cy="250.5289"
+       r="113.58862" />
+  </g>
+</svg>
